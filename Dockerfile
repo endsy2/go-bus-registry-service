@@ -2,8 +2,11 @@
 FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
 
-# Copy entire project (IMPORTANT FIX)
+# Copy entire project
 COPY . .
+
+# FIX: ensure gradlew is executable
+RUN chmod +x gradlew
 
 # Build only Eureka service
 RUN ./gradlew :eureka-server:build -x test --no-daemon
@@ -15,6 +18,7 @@ WORKDIR /app
 
 RUN apk add --no-cache curl
 
+# Copy built jar
 COPY --from=build /app/eureka-server/build/libs/*.jar app.jar
 
 ENV PORT=8761
