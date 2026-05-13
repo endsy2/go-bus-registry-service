@@ -27,3 +27,11 @@ management:
   endpoint:
     health:
       show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.busapp: DEBUG
