@@ -21,7 +21,6 @@ RUN apk add --no-cache curl
 # Copy built jar
 COPY --from=build /app/build/libs/*.jar app.jar
 
-ENV PORT=8761
-EXPOSE ${PORT}
+EXPOSE 8761
 
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT} -Xmx768m -Xms512m -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-8761} -Xmx768m -Xms512m -jar app.jar"]
