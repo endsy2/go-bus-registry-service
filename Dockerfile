@@ -3,14 +3,14 @@ FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
 
 # Copy gradle wrapper and root build files from backend directory
-COPY backend/gradlew gradlew
-COPY backend/gradle gradle
-COPY backend/build.gradle build.gradle
-COPY backend/settings.gradle settings.gradle
+COPY /gradlew gradlew
+COPY /gradle gradle
+COPY /build.gradle build.gradle
+COPY /settings.gradle settings.gradle
 
 # Copy eureka-server specific files
-COPY backend/eureka-server/build.gradle eureka-server/build.gradle
-COPY backend/eureka-server/src eureka-server/src
+COPY /eureka-server/build.gradle eureka-server/build.gradle
+COPY /eureka-server/src eureka-server/src
 
 # Build the service
 RUN ./gradlew :eureka-server:build -x test --no-daemon
