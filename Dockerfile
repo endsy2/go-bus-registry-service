@@ -8,8 +8,8 @@ COPY . .
 # FIX: ensure gradlew is executable
 RUN chmod +x gradlew
 
-# Build only Eureka service
-RUN ./gradlew :eureka-server:build -x test --no-daemon
+# Build the application
+RUN ./gradlew build -x test --no-daemon
 
 
 # ─── Stage 2: Runtime ───────────────────────────
@@ -19,7 +19,7 @@ WORKDIR /app
 RUN apk add --no-cache curl
 
 # Copy built jar
-COPY --from=build /app/eureka-server/build/libs/*.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
 ENV PORT=8761
 EXPOSE ${PORT}
