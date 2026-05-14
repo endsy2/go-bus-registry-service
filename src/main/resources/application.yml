@@ -14,7 +14,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://${Eureka_Base_Url}/eureka/
+      defaultZone: http://go-bus-registry-service-production.up.railway.app/eureka/
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 5000
